@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to App</title>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            // 현재 URL의 경로만 추출
+            var rootPath = 'root/';
+            var urlParams = new URLSearchParams(window.location.search);
+            var route = urlParams.get('route') = "/";
+            var specific = urlParams.get('specific');
+
+            // 앱 스킴으로 리다이렉트할 URL 생성 (앱이 설치된 경우)
+
+            var appUrlForAos = 'com.dangpro://dangpro/' + rootPath + route + specific;
+            var appUrlForIos = 'dangpro://' + rootPath + route + specific;
+
+            // 앱없는 경우를 대비해 iOS 및 Android 앱스토어 링크 셋팅하기.
+            var iosStoreUrl = 'https://apps.apple.com/kr/app/4CUTT2FQU7.com.dangpro.app';
+            var androidStoreUrl = 'https://play.google.com/store/apps/details?id=com.dangpro';  // 안드로이드 플레이스토어 링크
+
+            //  사용자의 플랫폼 구분
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            // 일단 스토어 열고 시작. 
+            // JS 에서는 app이 설치되어있는지 확인할 방법이 없다.
+            // 그리고 앱을 먼저 실행해서 확인하려고해도, 앱 여는 실패에 대해서 그 어떤 return 도 error 도 발생 시키지 않는다. 
+            // 이 문제에 대한 해결 방법은 추후에 찾아봐야 할 듯 싶다. 일단 intent 를 사용해서. 아 근데 깃허브로 배포하는 웹은 갱신 제한 걸린듯하다. 14시 15분 이후로 갱신이 안된다. 젠장 ㅡ.ㅡ
+
+            if (isAndroid) {
+                window.location.href = androidStoreUrl;  // Android 사용자에게 플레이스토어로 이동
+                // window.location.href = "intent://dangpro/root/#Intent;scheme=com.dangpro;package=com.dangpro;end;";
+                window.location.href = appUrlForAos;
+
+            } else if (isIOS) {
+                window.location.href = iosStoreUrl;  // iOS 사용자에게 앱스토어로 이동
+                // window.location.href = "dangpro://root/";
+                window.location.href = appUrlForIos;
+
+            }
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <!-- <h1>Redirecting...</h1> -->
+    <p>당프로 앱으로 이동합니다. </p>
+    <p>모바일로 접속하지 않으신 분들은, 모바일로 접속해 주시기 바랍니다. 1448</p>
+</body>
+
+</html>
