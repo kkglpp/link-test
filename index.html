@@ -35,13 +35,16 @@
             if (isAndroid) {
                 window.location.href = androidStoreUrl;  // Android 사용자에게 플레이스토어로 이동
                 // window.location.href = "intent://dangpro/root/#Intent;scheme=com.dangpro;package=com.dangpro;end;";
-                window.location.href = appUrlForAos;
+                setTimeout(function () {
+                    window.location.href = appUrlForAos;
+                }, 2000); // 2000ms = 2초 후 (1초 간격
 
             } else if (isIOS) {
                 window.location.href = iosStoreUrl;  // iOS 사용자에게 앱스토어로 이동
                 // window.location.href = "dangpro://root/";
-                window.location.href = appUrlForIos;
-
+                setTimeout(function () {
+                    window.location.href = appUrlForIos;
+                }, 2000); // 2000ms = 2초 후 (1초 간격)
             }
         });
 
