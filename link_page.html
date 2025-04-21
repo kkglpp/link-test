@@ -35,8 +35,21 @@
                 //     // window.location.href = appUrlForAos;
                 // }, 200);
             } else if (isIOS) {
+
+                const ua = navigator.userAgent;
+                const isSamsungInternet = /SamsungBrowser/i.test(ua);
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
-                window.location.href = appUrlForIos;
+
+                if (isSamsungInternet) {
+                    window.location.href = appUrlForIos;
+                } else {
+                    // iframe 방식으로 실행 (유효하지 않은 링크 경고 방지)
+                    var iframe = document.createElement("iframe");
+                    iframe.style.display = "none";
+                    iframe.src = appUrlForIos;
+                    document.body.appendChild(iframe);
+                }
+
                 setTimeout(function () {
                     window.location.href = iosStoreUrl;
                 }, 3000);
