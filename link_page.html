@@ -30,29 +30,20 @@
 
             if (isAndroid) {
                 window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
-                // window.location.href = androidStoreUrl;  // Android 사용자에게 플레이스토어로 이동
-                // setTimeout(function () {
-                //     // window.location.href = appUrlForAos;
-                // }, 200);
+
             } else if (isIOS) {
 
-                const ua = navigator.userAgent;
-                const isSamsungInternet = /SamsungBrowser/i.test(ua);
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
+                var iframe = document.createElement("iframe");
+                iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
+                iframe.src = appUrlForIos;
+                document.body.appendChild(iframe);
 
-                if (isSamsungInternet) {
-                    window.location.href = appUrlForIos;
-                } else {
-                    // iframe 방식으로 실행 (유효하지 않은 링크 경고 방지)
-                    var iframe = document.createElement("iframe");
-                    iframe.style.display = "none";
-                    iframe.src = appUrlForIos;
-                    document.body.appendChild(iframe);
-                }
-
+                // window.location.href = appUrlForIos;
                 setTimeout(function () {
                     window.location.href = iosStoreUrl;
                 }, 3000);
+
             }
         });
     </script>
@@ -62,7 +53,7 @@
 
     <p>당프로 앱으로 이동합니다. </p>
     <p>모바일로 접속하지 않으신 분들은</p>
-    <p>모바일로 접속해 주시기 바랍니다. 1521</p>
+    <p>모바일로 접속해 주시기 바랍니다.</p>
 
 </body>
 
