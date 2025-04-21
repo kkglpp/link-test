@@ -22,14 +22,18 @@
 
             // 앱없는 경우를 대비해 iOS 및 Android 앱스토어 링크 셋팅하기.
             var iosStoreUrl = 'https://apps.apple.com/kr/app/dangpro/id6741411538';
+            // var androidStoreUrl = 'https://play.google.com/store/apps/details?id=com.dangpro';
 
             //  사용자의 플랫폼 구분
             var isAndroid = /Android/i.test(navigator.userAgent);
             var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
             if (isAndroid) {
-                window.location.href = "intent://" + "dangpro/" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
-
+                window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
+                // window.location.href = androidStoreUrl;  // Android 사용자에게 플레이스토어로 이동
+                // setTimeout(function () {
+                //     // window.location.href = appUrlForAos;
+                // }, 200);
             } else if (isIOS) {
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
                 window.location.href = appUrlForIos;
