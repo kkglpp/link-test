@@ -35,11 +35,14 @@
                 //     // window.location.href = appUrlForAos;
                 // }, 200);
             } else if (isIOS) {
+                const ua = navigator.userAgent;
+                const isSafari = /Safari/i.test(ua) && !/Chrome|CriOS/i.test(ua);
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
                 window.location.href = appUrlForIos;
-                // setTimeout(function () {
-                //     window.location.href = iosStoreUrl;
-                // }, 3000);
+                setTimeout(function () {
+                    window.location.href = iosStoreUrl;
+                }, 3000);
+
             }
         });
     </script>
@@ -49,7 +52,7 @@
 
     <p>당프로 앱으로 이동합니다. </p>
     <p>모바일로 접속하지 않으신 분들은</p>
-    <p>모바일로 접속해 주시기 바랍니다.1539</p>
+    <p>모바일로 접속해 주시기 바랍니다.1601</p>
 
 </body>
 
