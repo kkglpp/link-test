@@ -9,7 +9,7 @@
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function () {
             // 현재 URL의 경로만 추출
-            var rootPath = 'root/';
+            var rootPath = '/root/';
             var urlParams = new URLSearchParams(window.location.search);
             var route = urlParams.get('route') + "/";
             var specific = urlParams.get('specific');
@@ -17,7 +17,7 @@
             // 앱 스킴으로 리다이렉트할 URL 생성 (앱이 설치된 경우)
             var inAppRoute = rootPath + route + specific;
 
-            var appUrlForAos = 'com.dangpro://dangpro/' + inAppRoute;
+            var appUrlForAos = 'com.dangpro://dangpro' + inAppRoute;
             var appUrlForIos = 'dangpro://' + inAppRoute;
 
             // 앱없는 경우를 대비해 iOS 및 Android 앱스토어 링크 셋팅하기.
