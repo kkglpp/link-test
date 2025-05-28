@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FCM Token 테스트</title>
+    <script>
+        // Flutter에서 보낸 fcmTokenReceived 이벤트를 듣는다
+        window.addEventListener("fcmTokenReceived", function (event) {
+            const token = event.detail.token;
+            const os = event.detail.os;
+
+            console.log("FCM Token received from Flutter:", token);
+            alert("FCM Token: " + token + "\nOS: " + os);
+        });
+
+        // 테스트용 버튼: Flutter에 요청
+        function requestFcmTokenFromFlutter() {
+            if (window.FcmToken) {
+                window.FcmToken.postMessage("send");
+            } else {
+                alert("Flutter WebView와 연결되지 않았습니다.");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>FCM Token 테스트 페이지</h1>
+    <button onclick="requestFcmTokenFromFlutter()">FCM 토큰 요청</button>
+</body>
+
+</html>

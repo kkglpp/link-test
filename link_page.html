@@ -34,6 +34,10 @@
             } else if (isIOS) {
 
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
+                // safari 에서는  앱이 없을때 window.location.href 가 에러메시지를 출력한다.
+                // 시뮬레이터에서는 iosStoreUrl에서도 경고 메시지가 출력된다.
+                // iframe 방식을 쓰면,  경고메시지를 띄우지 않는다. 크롬, 파폭, 엣지 등에서는 이슈가 없다고 한다.
+                // 근데 삼성인터넷에서는 이슈가 있을 수도 없을 수도 있다고 한다.
                 var iframe = document.createElement("iframe");
                 iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
                 iframe.src = appUrlForIos;
