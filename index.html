@@ -8,11 +8,16 @@
 
     <script type="text/javascript">
         window.addEventListener("fcmTokenReceived", function (event) {
-            const token = event.detail.token;
-            const os = event.detail.os;
+            try {
+                const token = event.detail.token;
+                const os = event.detail.os;
 
-            console.log("FCM Token received from Flutter:", token);
-            alert("FCM Token: " + token + "\nOS: " + os);
+                console.log("FCM Token received from Flutter:", token);
+                alert("FCM Token: " + token + "\nOS: " + os);
+            } catch (error) {
+                alert("Error processing FCM token event: " + error.message);
+                console.error("Error processing FCM token event:", error);
+            }
         });
 
         // 테스트용 버튼: Flutter에 요청
@@ -24,6 +29,7 @@
             }
         }
     </script>
+
 </head>
 
 <body>
