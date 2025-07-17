@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리다이렉트</title>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var inAppRoute = "/root/";
+            var appUrlForAos = 'com.dangpro://dangpro/root/';
+            var appUrlForIos = 'dangpro://' + inAppRoute;
+            var iosStoreUrl = 'https://apps.apple.com/kr/app/dangpro/id6741411538';
+            //  사용자의 플랫폼 구분
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isAndroid) {
+                window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
+            } else if (isIOS) {
+                window.location.href = appUrlForIos;
+                setTimeout(function () {
+                    window.location.href = iosStoreUrl;
+                }, 3000);
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <p>리다이렉트 페이지 test </p>
+    <p>모바일로 접속할때만 작동</p>
+    <p>마지막 테스트 시간 : 25/00/00</p>
+
+</body>
+
+</html>

@@ -4,14 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리다이렉트</title>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var inAppRoute = "/root/";
+            var appUrlForAos = 'com.dangpro://dangpro/root/';
+            var appUrlForIos = 'dangpro://' + inAppRoute;
+            var iosStoreUrl = 'https://apps.apple.com/kr/app/dangpro/id6741411538';
+            //  사용자의 플랫폼 구분
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isAndroid) {
+                window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
+            } else if (isIOS) {
+                window.location.href = appUrlForIos;
+                setTimeout(function () {
+                    window.location.href = iosStoreUrl;
+                }, 3000);
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <p>리다이렉트 페이지 test </p>
+    <p>모바일로 접속할때만 작동</p>
+    <p>마지막 테스트 시간 : 25/00/00</p>
+
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>link_test_kkg</title>
 
     <script type="text/javascript">
+
+        /*
+        fcm 토큰을 활용할 수 있도록 하기 위한 공유자료 입니다. 창환팀장님 요청
+        다소 부족하거나, 지나친 설명이 있을 수 있습니다.
+
+        0. Flutter 에서 웹뷰로 메인페이지 웹을 띄웁니다. 이때 1번의 채널을 등록이 이루어집니다.
+
+        1. Flutter 에서 JS채널 등록
+            Flutter 에서 'FcmToken' 이라는 이름의  JavaScriptChannel을 등록합니다. (js 에서는 window.FcmToken 로 확인)
+
+        2. JS에서 해당 채널이 있는지 확인 (Flutter WebView로 접속 했을 때만 실행되기 위함)
+            버튼을 눌럿을때 ->  requestFcmTokenFromFlutter 함수에서  "FcmToken"채널이 존재하는지 확인후
+
+        3. JS ==> Flutter 요청 전송 
+            존재할 경우 window.FcmToken.postMessage("send") 를 통해 Flutter 앱으로 메시지(트리거)를 보냅니다.
+            >> Flutter 로 'send' 라는 메시지를 전달하는 코드 입니다.  (send 는 임의로 변경가능. 웹과 앱에서 같은 값 맞추면 됨)
+
+        4. Flutter ==> JS 응답 전송
+            Flutter 에서 'send' 라는 메시지를 받으면, fcm 토큰을 받아서 fcmTokenReceived 라는 이벤트/메시지 를 js 쪽으로 보내게 됩니다.
+            >> 이때 addEventListener 에 등록된 함수가 실행됩니다.
+
+        5. 현재 만들어둔 테스트 코드에서는, 결과적으로 기기의 토큰값을 제대로 받았는지 확인위해 alert 를 띄우도록 하였습니다.
+        
+        *** 추가 내용 ***
+        4번 과정에서  fcmTokenReceived 라는 이벤트/메시지로 JS 에서 받게 되는 데이터는 아래와 같습니다.
+        {
+        detail: {
+                token: "$token", >>>> fcm 토큰값
+                os: "$os"        >>>> 안드로이드: aos   IOS : ios 로 넘어옴
+                }
+        }
+
+        이렇게 전달되는 값을 로그인때 서버로 같이 보내주어야 합니다.
+        */
         window.addEventListener("fcmTokenReceived", function (event) {
             try {
                 const token = event.detail.token;
                 const os = event.detail.os;
-
                 console.log("FCM Token received from Flutter:", token);
                 alert("FCM Token: " + token + "\nOS: " + os);
             } catch (error) {
@@ -20,7 +92,7 @@
             }
         });
 
-        // 테스트용 버튼: Flutter에 요청
+        // window.FcmToken 은  'FcmToken' 이라는 jschannel 이 생성 되었는지 확인하기 위함입니다.
         function requestFcmTokenFromFlutter() {
             if (window.FcmToken) {
                 window.FcmToken.postMessage("send");
@@ -37,10 +109,7 @@
     <button onclick="requestFcmTokenFromFlutter()">FCM 토큰 요청</button>
 
 
-    <p>당프로 앱으로 이동합니다. </p>
-    <p>모바일로 접속하지 않으신 분들은</p>
-    <p>모바일로 접속해 주시기 바랍니다.</p>
 
 </body>
 
-</html>
+</html> -->
