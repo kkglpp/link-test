@@ -6,7 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>리다이렉트</title>
 
+    
     <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var userAgent = navigator.userAgent;
+            var query = encodeURIComponent("당프로");
+
+            // iOS 기기 감지
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://apps.apple.com/kr/search?term=" + query;
+            }
+            // Android 기기 감지
+            else if (/android/i.test(userAgent)) {
+                window.location.href = "https://play.google.com/store/search?q=" + query + "&c=apps";
+            }
+            // PC나 기타 환경일 경우
+            else {
+                document.body.insertAdjacentHTML('beforeend', '<p>모바일 기기에서 접속해주세요.</p>');
+            }
+        });
+    </script>
+
+<!--     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function () {
             var inAppRoute = "/root/";
             var appUrlForAos = 'com.dangpro://dangpro/root/';
@@ -24,7 +45,7 @@
                 }, 3000);
             }
         });
-    </script>
+    </script> -->
 </head>
 
 <body>
