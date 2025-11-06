@@ -39,7 +39,7 @@
                 window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
 
             } else if (isIOS) {
-
+                // `1106 ios에서 리다이렉트 안되는 이슈 해결중.
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
                 var iframe = document.createElement("iframe");
                 iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
