@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,6 +13,13 @@
             var urlParams = new URLSearchParams(window.location.search);
             var route = urlParams.get('route') + "/";
             var specific = urlParams.get('specific');
+
+            // -------------------------------------------------------------
+            // route에 'agreement'가 포함되면 rootPath를 ""로 설정하는 조건문 추가
+            if (route.includes("agreement_param")) {
+                rootPath = "/";
+            }
+            // -------------------------------------------------------------
 
             // 앱 스킴으로 리다이렉트할 URL 생성 (앱이 설치된 경우)
             var inAppRoute = rootPath + route + specific;
@@ -32,16 +39,13 @@
                 window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
 
             } else if (isIOS) {
-
+                // `1106 ios에서 리다이렉트 안되는 이슈 해결중.
                 //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
-                // safari 에서는  앱이 없을때 window.location.href 가 에러메시지를 출력한다.
-                // 시뮬레이터에서는 iosStoreUrl에서도 경고 메시지가 출력된다.
-                // iframe 방식을 쓰면,  경고메시지를 띄우지 않는다. 크롬, 파폭, 엣지 등에서는 이슈가 없다고 한다.
-                // 근데 삼성인터넷에서는 이슈가 있을 수도 없을 수도 있다고 한다.
-                var iframe = document.createElement("iframe");
-                iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
-                iframe.src = appUrlForIos;
-                document.body.appendChild(iframe);
+                // var iframe = document.createElement("iframe");
+                // iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
+                // iframe.src = appUrlForIos;
+                // document.body.appendChild(iframe);
+                window.location = appUrlForIos;
 
                 // window.location.href = appUrlForIos;
                 setTimeout(function () {
@@ -61,4 +65,4 @@
 
 </body>
 
-</html> -->
+</html>

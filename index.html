@@ -1,4 +1,76 @@
 <!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautyrella</title>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let rootPath = "/root/";
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let route = urlParams.get("route") || "";
+            let specific = urlParams.get("specific") || "";
+
+            if (route && !route.endsWith("/")) {
+                route += "/";
+            }
+
+            // agreement 예외 처리
+            if (route.includes("agreement_param")) {
+                rootPath = "/";
+            }
+
+            const inAppRoute = rootPath + route + specific;
+
+            const scheme = "beautyrella://";
+
+            const appUrl = scheme + inAppRoute;
+
+            const iosStoreUrl = "https://apps.apple.com/kr/app/beautyrella/id6758376203";
+
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+
+                const intentUrl =
+                    "intent://" +
+                    inAppRoute +
+                    "#Intent;" +
+                    "scheme=beautyrella;" +
+                    "package=com.beafter.beautyrella;" +
+                    "end;";
+
+                window.location.href = intentUrl;
+
+            } else if (isIOS) {
+
+                window.location.href = appUrl;
+
+                setTimeout(function () {
+                    window.location.href = iosStoreUrl;
+                }, 2000);
+
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <p>Beautyrella 앱으로 이동합니다.</p>
+    <p>모바일 환경에서 접속해 주세요.</p>
+
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -39,12 +111,7 @@
                 window.location.href = "intent://" + "dangpro" + inAppRoute + "#Intent;scheme=com.dangpro;package=com.dangpro;end;";
 
             } else if (isIOS) {
-                // `1106 ios에서 리다이렉트 안되는 이슈 해결중.
-                //ios에서는   app 실행을 먼저 묻기 때문에 지연시간 좀더 길게 줘야한다.
-                // var iframe = document.createElement("iframe");
-                // iframe.style.display = "none";  // iframe을 화면에 보이지 않도록 설정
-                // iframe.src = appUrlForIos;
-                // document.body.appendChild(iframe);
+
                 window.location = appUrlForIos;
 
                 // window.location.href = appUrlForIos;
@@ -66,4 +133,4 @@
 
 </body>
 
-</html>
+</html> -->
